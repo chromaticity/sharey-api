@@ -1,8 +1,9 @@
 // import the express route libraries
-let express = require('express');
+// let express = require('express');
+import express from 'express';
 let router = express.Router();
 
-// get the stupid fuckin home page route
+// Any routes related to the home/base route go here.
 router.get('/', function(req,res) {
     res.json({
         'app_name': 'Sharey App',
