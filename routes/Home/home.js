@@ -4,7 +4,7 @@ let router = express.Router();
 
 // get the stupid fuckin home page route
 router.get('/', function(req,res) {
-    res.send({
+    res.json({
         'app_name': 'Sharey App',
         'app_description': 'Application for uploading, saving, and tagging images.'
     })

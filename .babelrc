@@ -1,0 +1,8 @@
+// Added babel compiler so it cooperates with ES6.
+// Also, make sure to add in the script into package.json
+
+{   
+  "presets": [
+    "@babel/preset-env"   
+  ] 
+}
