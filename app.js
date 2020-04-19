@@ -22,11 +22,17 @@ db.on('error', console.error.bind(console, 'Error connecting to MongoDB. Reason:
 
 // Add any necessary routes here.
 import home from './routes/Home/home.js';
+import auth from './routes/Auth/login.js'
 
 // Add route prefix of /api since this is an api.
 app.use(
     '/api/',
     home
+);
+
+app.use(
+    '/api/auth',
+    auth
 );
 
 

@@ -1,5 +1,4 @@
 // import the express route libraries
-// let express = require('express');
 import express from 'express';
 let router = express.Router();
 
