@@ -18,6 +18,8 @@ mongoose.connect(mongoDbUrl, {
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to MongoDB. Reason:'));
 
+
+
 // Add any necessary routes here.
 import home from './routes/Home/home.js';
 
