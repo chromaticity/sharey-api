@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import credentials from '../../configs/credentials.js';
 
 // Function that takes care of logging in.
-exports.authLogin = (req, res) => {
+exports.authLoginClient = (req, res) => {
     let clientName = req.body.clientName;
     let clientSecret = req.body.clientSecret;
 
@@ -24,11 +24,18 @@ exports.authLogin = (req, res) => {
                     expiresIn: '1h'
                 }
             );
+
+            // Return the token for the client to use.
+            res.json({
+                success: true,
+                message: 'Authentication succeeded.',
+                token: clientToken
+            });
         }
     } else {
         res.send(403).json({
-            'success': false,
-            'message': 'Please send a client name and a client secret.'
+            success: false,
+            message: 'Please send a client name and a client secret.'
         })
     }
 }
