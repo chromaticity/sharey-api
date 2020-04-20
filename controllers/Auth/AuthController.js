@@ -17,7 +17,8 @@ exports.authLoginClient = (req, res) => {
             // Generate the client token if authentication goes well.
             let clientToken = jwt.sign(
                 {
-                    clientName: clientName
+                    clientName: clientName, // Name of the client
+                    iat: credentials.tokenIssuer // Issuer of the token
                 },
                 credentials.jwtSecret,
                 {
