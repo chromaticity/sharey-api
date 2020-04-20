@@ -14,16 +14,16 @@ exports.authLogin = (req, res) => {
     // Some request validation. Also checking to see that the creds are the same.
     if(clientName && clientSecret) {
         if(clientName === actualClientName && clientSecret === actualClientSecret) {
-            // Get the request.
+            // Generate the client token if authentication goes well.
             let clientToken = jwt.sign(
-                    {
-                        clientName: clientName
-                    },
-                    credentials.jwtSecret,
-                    {
-                        expiresIn: '1h'
-                    }
-                );
+                {
+                    clientName: clientName
+                },
+                credentials.jwtSecret,
+                {
+                    expiresIn: '1h'
+                }
+            );
         }
     } else {
         res.send(403).json({
@@ -31,4 +31,8 @@ exports.authLogin = (req, res) => {
             'message': 'Please send a client name and a client secret.'
         })
     }
+}
+
+exports.authLogout = (req, res) => {
+    //@TODO kill session.
 }

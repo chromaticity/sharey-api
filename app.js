@@ -25,15 +25,8 @@ import home from './routes/Home/home.js';
 import auth from './routes/Auth/login.js'
 
 // Add route prefix of /api since this is an api.
-app.use(
-    '/api/',
-    home
-);
-
-app.use(
-    '/api/auth',
-    auth
-);
+app.use('/api/', home);
+app.use('/api/auth', auth);
 
 
 // Run the application.
