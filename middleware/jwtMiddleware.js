@@ -6,11 +6,36 @@
 */
 
 import jwt from 'jsonwebtoken';
-import credentials from './configs/credentials.js';
+import credentials from '../configs/credentials.js';
 
 // Verify the token.    
 let verifyToken = (req, res, next) => {
-    console.log("this is one of those tests");
+    // Pull out the token from the headers
+    let token = req.headers['x-access-token'] || req.headers['Authorization'] || req.headers['authorization'];
+
+    // Check if the token starts with Bearer. If it does, just retrieve the key.
+    if(token.startsWith('Bearer ')) {
+        token = token.slice('7', token.length)
+    }
+
+    if(!token) {
+        res.send(403).json({
+            success: false,
+            message: 'Access token is missing.'
+        });
+    } else {
+        jwt.verify(token, credentials.jwtSecret, function(errors, decoded) {
+            if(errors) {
+                res.json({
+                    success: false,
+                    message: 'Token is not valid.'
+                });
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        })
+    }
 }
 
 export default verifyToken;
