@@ -18,12 +18,7 @@ let verifyToken = (req, res, next) => {
         token = token.slice('7', token.length)
     }
 
-    if(!token) {
-        res.send(403).json({
-            success: false,
-            message: 'Access token is missing.'
-        });
-    } else {
+    if(token) {
         jwt.verify(token, credentials.jwtSecret, function(errors, decoded) {
             if(errors) {
                 res.json({
@@ -35,6 +30,11 @@ let verifyToken = (req, res, next) => {
                 next();
             }
         })
+    } else {
+        res.send(403).json({
+            success: false,
+            message: 'Access token is missing.'
+        });
     }
 }
 
