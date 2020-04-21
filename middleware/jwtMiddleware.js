@@ -38,4 +38,7 @@ let verifyToken = (req, res, next) => {
     }
 }
 
-export default verifyToken;
+// Verify why this works for middleware.
+module.exports = {
+    verifyToken: verifyToken
+}

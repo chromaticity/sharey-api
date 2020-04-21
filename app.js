@@ -24,10 +24,12 @@ db.on('error', console.error.bind(console, 'Error connecting to MongoDB. Reason:
 import home from './routes/Home/home.js';
 import auth from './routes/Auth/login.js'
 
-// Add route prefix of /api since this is an api.
-app.use('/api/', home);
-app.use('/api/auth', auth);
+// Add any needed middleware here.
+import authMiddleware from './middleware/jwtMiddleware.js'
 
+// Add route prefix of /api since this is an api.
+app.use('/api/', authMiddleware.verifyToken, home);
+app.use('/api/auth', auth);
 
 // Run the application.
 app.listen(port, () => console.log(`App running on http://localhost:${port}`))
