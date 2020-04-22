@@ -11,7 +11,9 @@ import credentials from '../configs/credentials.js';
 // Verify the token.    
 let verifyToken = (req, res, next) => {
     // Pull out the token from the headers
-    let token = req.headers['x-access-token'] || req.headers['Authorization'] || req.headers['authorization'];
+    let token = req.headers['x-access-token'] || 
+                req.headers['Authorization'] || 
+                req.headers['authorization'];
 
     // Check if the token starts with Bearer. If it does, just retrieve the key.
     if(token.startsWith('Bearer ')) {
