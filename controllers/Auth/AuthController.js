@@ -3,21 +3,21 @@ import credentials from '../../configs/credentials.js';
 
 // Function that takes care of logging in.
 exports.authLoginClient = (req, res) => {
-    let clientName = req.body.clientName;
-    let clientSecret = req.body.clientSecret;
+    let username = req.body.username;
+    let password = req.body.password;
 
     // fake values for now, this is just to test jwt
     // @TODO replace with actual mongodb values.
-    let actualClientName = 'test';
-    let actualClientSecret = '123456';
+    let actualUsername = 'test';
+    let actualPassword = '123456';
 
     // Some request validation. Also checking to see that the creds are the same.
-    if(clientName && clientSecret) {
-        if(clientName === actualClientName && clientSecret === actualClientSecret) {
+    if(username && password) {
+        if(username === actualUsername && password === actualPassword) {
             // Generate the client token if authentication goes well.
             let clientToken = jwt.sign(
                 {
-                    clientName: clientName, // Name of the client
+                    username: username, // Name of the client
                     iat: credentials.tokenIssuer // Issuer of the token
                 },
                 credentials.jwtSecret,
@@ -36,7 +36,7 @@ exports.authLoginClient = (req, res) => {
     } else {
         res.send(403).json({
             success: false,
-            message: 'Please send a client name and a client secret.'
+            message: 'Please enter a username or password.'
         })
     }
 }
