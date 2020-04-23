@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import credentials from '../../configs/credentials.js';
 
 // Function that takes care of logging in.
-exports.authLoginClient = (req, res) => {
+exports.authLoginUser = (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
@@ -41,6 +41,16 @@ exports.authLoginClient = (req, res) => {
     }
 }
 
-exports.authLogout = (req, res) => {
-    //@TODO kill session.
+
+// Register the user
+exports.authRegisterUser = (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+
+    if(username && password) {
+        
+        // Store the username and password into mongodb
+        
+
+    }
 }
