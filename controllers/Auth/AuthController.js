@@ -3,8 +3,8 @@ import credentials from '../../configs/credentials.js';
 
 // Function that takes care of logging in.
 exports.authLoginUser = (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
+    let username = req.username;
+    let password = req.password;
 
     // fake values for now, this is just to test jwt
     // @TODO replace with actual mongodb values.
@@ -47,5 +47,16 @@ exports.authRegisterUser = (req, res) => {
     console.log(req.body.username)
     let username = req.username || null;
     let password = req.password || null;
+
+    if(username && password) {
+        // Store the credentials.
+        // Later, we'll add email notifications/confirmations.
+
+    } else {
+        res.send({
+            success: false,
+            message: 'Please enter a username and password..'
+        });
+    }
 
 }
