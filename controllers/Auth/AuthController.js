@@ -44,13 +44,8 @@ exports.authLoginUser = (req, res) => {
 
 // Register the user
 exports.authRegisterUser = (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
+    console.log(req.body.username)
+    let username = req.username || null;
+    let password = req.password || null;
 
-    if(username && password) {
-        
-        // Store the username and password into mongodb
-        
-
-    }
 }

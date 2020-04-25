@@ -4,11 +4,10 @@
 
 import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
-import bcrypt from 'bcrypt';
-
+import crypto from 'crypto';
 
 // User schema
-let UserSchema = new.mongoose.Schema({
+let UserSchema = new Schema({
     username: {
         type: String,
         required: [true, "Username cannot be empty."],
@@ -26,7 +25,12 @@ let UserSchema = new.mongoose.Schema({
 
 // Adding a method to a mongoose schema.
 UserSchema.methods.setUserPassword = function(cb) {
-    
+    // generate the salt
+    this.salt = crypto.randomBytes(16).toString('hex');
+    // encrypt the password
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512');
+
+    return this.hash;
 };
 
 
